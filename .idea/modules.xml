@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/XYZReader/XYZReader.iml" filepath="$PROJECT_DIR$/XYZReader/XYZReader.iml" />
+      <module fileurl="file://C:\Development\Projects\xyz-reader-starter-code\XYZReader\XYZReader.iml" filepath="C:\Development\Projects\xyz-reader-starter-code\XYZReader\XYZReader.iml" />
       <module fileurl="file://$PROJECT_DIR$/xyz-reader-starter-code.iml" filepath="$PROJECT_DIR$/xyz-reader-starter-code.iml" />
+      <module fileurl="file://C:\Development\Projects\xyz-reader-starter-code\xyz-reader-starter-code.iml" filepath="C:\Development\Projects\xyz-reader-starter-code\xyz-reader-starter-code.iml" />
     </modules>
   </component>
 </project>

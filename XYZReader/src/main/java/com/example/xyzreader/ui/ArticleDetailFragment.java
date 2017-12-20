@@ -5,6 +5,7 @@ import android.app.LoaderManager;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,15 +22,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.xyzreader.R;
 import com.example.xyzreader.data.ArticleLoader;
 import com.example.xyzreader.util.ImageLoaderUtils;
+import com.example.xyzreader.util.SplitTextUtils;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * A fragment representing a single Article detail screen. This fragment is
@@ -41,6 +45,8 @@ public class ArticleDetailFragment extends Fragment implements
     private static final String TAG = "ArticleDetailFragment";
 
     public static final String ARG_ITEM_ID = "item_id";
+
+    private static final int NUMBER_OF_CHARACTERS_TO_LOAD = 3000;
 
     private Cursor mCursor;
     private long mItemId;
@@ -66,8 +72,14 @@ public class ArticleDetailFragment extends Fragment implements
     @BindView(R.id.share_fab)
     FloatingActionButton fabView;
 
+    @BindView(R.id.load_more)
+    Button loadMoreView;
+
     @BindView(R.id.movie_detail_container)
     NestedScrollView movieDetailContainer;
+
+    private String[] mBodySplitted;
+    private int mBodyIndex = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -111,7 +123,7 @@ public class ArticleDetailFragment extends Fragment implements
         String photoUrl = mCursor.getString(ArticleLoader.Query.PHOTO_URL);
         DisplayMetrics metrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        ImageLoaderUtils.loadImage(backgroundView, photoUrl, metrics.widthPixels, 1.33f);
+        ImageLoaderUtils.loadImage(backgroundView, photoUrl, metrics.widthPixels);
 
         String title = mCursor.getString(ArticleLoader.Query.TITLE);
         titleView.setText(title);
@@ -128,9 +140,22 @@ public class ArticleDetailFragment extends Fragment implements
         authorView.setText(author);
 
         final Spanned body = Html.fromHtml(mCursor.getString(ArticleLoader.Query.BODY).replaceAll("(\r\n|\n)", "<br />"));
-        bodyView.setText(body);
+        mBodySplitted = SplitTextUtils.splitTextIntoParts(body.toString(), NUMBER_OF_CHARACTERS_TO_LOAD);
+        bodyView.setText(mBodySplitted[mBodyIndex = 0]);
+
+        /*loadMoreView.setPaintFlags(loadMoreView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        loadMoreView.setVisibility(View.VISIBLE);*/
 
         configureFABBehaviour(body);
+    }
+
+    @OnClick(R.id.load_more)
+    public void onLoadMoreClick() {
+        Log.d(TAG, "Current index: " + mBodyIndex + " | appendText: " + mBodySplitted[mBodyIndex + 1]);
+        bodyView.append(mBodySplitted[++mBodyIndex]);
+        if (mBodyIndex == mBodySplitted.length - 1) {
+            loadMoreView.setVisibility(View.GONE);
+        }
     }
 
     private void configureToolbar(String title) {

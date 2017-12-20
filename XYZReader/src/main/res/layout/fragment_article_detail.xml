@@ -57,13 +57,12 @@
         android:padding="@dimen/activity_horizontal_margin"
         android:clipToPadding="false"
         android:background="@android:color/white"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="com.example.xyzreader.ui.FixAppBarLayoutBehavior">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical">
+            android:layout_marginTop="10dp">
 
             <TextView
                 android:id="@+id/article_title"
@@ -116,14 +115,26 @@
                 android:id="@+id/article_body"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:layout_marginTop="30dp"
                 android:autoLink="web"
                 android:linksClickable="true"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/article_author"
                 app:layout_constraintTop_toBottomOf="@+id/article_author" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_margin="30dp"
+                android:id="@+id/load_more"
+                android:background="@null"
+                android:textColor="@color/colorAccent"
+                style="@style/BlackLargeText"
+                android:text="@string/load_more"
+                app:layout_constraintTop_toBottomOf="@+id/article_body"
+                app:layout_constraintBottom_toBottomOf="parent" />
 
         </android.support.constraint.ConstraintLayout>
 

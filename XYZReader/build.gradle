@@ -25,4 +25,6 @@ dependencies {
     implementation "com.android.volley:volley:$volleyVersion"
     implementation "com.jakewharton:butterknife:$butterKnifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
+
+    testImplementation "junit:junit:$jUnitVersion"
 }

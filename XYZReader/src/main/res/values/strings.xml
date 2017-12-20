@@ -10,5 +10,8 @@
     <string name="up">Up</string>
     <string name="pipe">|</string>
     <string name="icon_of_the_application">Icon of the application</string>
+    <string name="load_more">Load more</string>
+    <string name="oops">Oops</string>
+    <string name="error_message_empty_list">The list is empty. Please, make sure that you have internet connection and try again (swiping down the list).</string>
 
 </resources>

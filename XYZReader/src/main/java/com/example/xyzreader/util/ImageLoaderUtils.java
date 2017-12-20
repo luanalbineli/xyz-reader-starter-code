@@ -10,9 +10,9 @@ import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
 public abstract class ImageLoaderUtils {
-    public static void loadImage(SimpleDraweeView simpleDraweeView, String imageUrl, int width, float aspectRatio) {
+    public static void loadImage(SimpleDraweeView simpleDraweeView, String imageUrl, int width) {
         ImageRequest imageRequest = ImageRequestBuilder.newBuilderWithSource(Uri.parse(imageUrl))
-                .setResizeOptions(new ResizeOptions(width, (int) (width * aspectRatio)))
+                .setResizeOptions(new ResizeOptions(width, (int) (width * 1.33)))
                 .setProgressiveRenderingEnabled(true)
                 .build();
 

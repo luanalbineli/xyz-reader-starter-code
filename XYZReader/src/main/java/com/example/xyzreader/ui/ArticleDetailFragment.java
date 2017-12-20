@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ShareCompat;
 import android.support.v4.content.ContextCompat;
@@ -78,6 +79,9 @@ public class ArticleDetailFragment extends Fragment implements
     @BindView(R.id.movie_detail_container)
     NestedScrollView movieDetailContainer;
 
+    @BindView(R.id.collapsing_toolbar)
+    CollapsingToolbarLayout collapsingToolbarLayoutView;
+
     private String[] mBodySplitted;
     private int mBodyIndex = 0;
 
@@ -119,6 +123,8 @@ public class ArticleDetailFragment extends Fragment implements
         if (mCursor == null) {
             return;
         }
+
+        collapsingToolbarLayoutView.setExpandedTitleColor(getResources().getColor(android.R.color.transparent));
 
         String photoUrl = mCursor.getString(ArticleLoader.Query.PHOTO_URL);
         DisplayMetrics metrics = new DisplayMetrics();
@@ -172,17 +178,6 @@ public class ArticleDetailFragment extends Fragment implements
     }
 
     private void configureFABBehaviour(final Spanned body) {
-        movieDetailContainer.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                if (scrollY > oldScrollY) {
-                    fabView.hide();
-                } else {
-                    fabView.show();
-                }
-            }
-        });
-
         fabView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -57,7 +57,7 @@
         android:padding="@dimen/activity_horizontal_margin"
         android:clipToPadding="false"
         android:background="@android:color/white"
-        app:layout_behavior="com.example.xyzreader.ui.FixAppBarLayoutBehavior">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"

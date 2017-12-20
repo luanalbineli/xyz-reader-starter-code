@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.Spanned;
 import android.text.format.DateUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -108,7 +109,9 @@ public class ArticleDetailFragment extends Fragment implements
         }
 
         String photoUrl = mCursor.getString(ArticleLoader.Query.PHOTO_URL);
-        ImageLoaderUtils.loadImage(backgroundView, photoUrl);
+        DisplayMetrics metrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        ImageLoaderUtils.loadImage(backgroundView, photoUrl, metrics.widthPixels, 1.33f);
 
         String title = mCursor.getString(ArticleLoader.Query.TITLE);
         titleView.setText(title);

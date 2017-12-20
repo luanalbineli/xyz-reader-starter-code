@@ -6,7 +6,7 @@
 
     <!-- detail -->
     <dimen name="detail_header_image_height">240dp</dimen>
-    <dimen name="fab_elevation">4dp</dimen>
+    <dimen name="fab_elevation">6dp</dimen>
     <dimen name="fab_press_translation_z">6dp</dimen>
     <dimen name="secondaryInformationMargin">4dp</dimen>
     <dimen name="activityDetailSeparatorMargin">6dp</dimen>

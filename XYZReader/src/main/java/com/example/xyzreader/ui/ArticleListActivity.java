@@ -113,13 +113,6 @@ public class ArticleListActivity extends AppCompatActivity implements
 
     private void updateRefreshingUI() {
         mSwipeRefreshLayout.setRefreshing(mIsRefreshing);
-        if (!mIsRefreshing && (mRecyclerView.getAdapter() == null || mRecyclerView.getAdapter().getItemCount() == 0)) {
-            Snackbar snackbar = Snackbar.make(findViewById(R.id.container), R.string.error_message_empty_list, Snackbar.LENGTH_LONG);
-            View view = snackbar.getView();
-            TextView tv = view.findViewById(android.support.design.R.id.snackbar_text);
-            tv.setTextColor(Color.WHITE);
-            snackbar.show();
-        }
     }
 
     @Override
@@ -129,12 +122,20 @@ public class ArticleListActivity extends AppCompatActivity implements
 
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-        Adapter adapter = new Adapter(cursor);
-        adapter.setHasStableIds(true);
-        mRecyclerView.setAdapter(adapter);
-        int columnCount = getResources().getInteger(R.integer.list_column_count);
-        StaggeredGridLayoutManager sglm = new StaggeredGridLayoutManager(columnCount, StaggeredGridLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(sglm);
+        if (cursor.getCount() == 0) {
+            Snackbar snackbar = Snackbar.make(findViewById(R.id.container), R.string.error_message_empty_list, Snackbar.LENGTH_LONG);
+            View view = snackbar.getView();
+            TextView tv = view.findViewById(android.support.design.R.id.snackbar_text);
+            tv.setTextColor(Color.WHITE);
+            snackbar.show();
+        } else {
+            Adapter adapter = new Adapter(cursor);
+            adapter.setHasStableIds(true);
+            mRecyclerView.setAdapter(adapter);
+            int columnCount = getResources().getInteger(R.integer.list_column_count);
+            StaggeredGridLayoutManager sglm = new StaggeredGridLayoutManager(columnCount, StaggeredGridLayoutManager.VERTICAL);
+            mRecyclerView.setLayoutManager(sglm);
+        }
     }
 
     @Override

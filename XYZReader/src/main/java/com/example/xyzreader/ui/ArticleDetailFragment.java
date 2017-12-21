@@ -130,6 +130,7 @@ public class ArticleDetailFragment extends Fragment implements
         DisplayMetrics metrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
         ImageLoaderUtils.loadImage(backgroundView, photoUrl, metrics.widthPixels);
+        backgroundView.setAspectRatio(mCursor.getFloat(ArticleLoader.Query.ASPECT_RATIO));
 
         String title = mCursor.getString(ArticleLoader.Query.TITLE);
         titleView.setText(title);

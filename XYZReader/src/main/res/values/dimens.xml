@@ -11,4 +11,5 @@
     <dimen name="secondaryInformationMargin">4dp</dimen>
     <dimen name="activityDetailSeparatorMargin">6dp</dimen>
     <dimen name="app_bar_elevation">4dp</dimen>
+    <dimen name="app_bar_layout_elevation">4dp</dimen>
 </resources>
